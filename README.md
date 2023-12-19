@@ -36,7 +36,7 @@ set `assets_for_all` true for your library in your PMM config. ex.
 libraries:
     Movies:
         operations:
-        assets_for_all: true
+            assets_for_all: true
 ```
 
 ## Usage
