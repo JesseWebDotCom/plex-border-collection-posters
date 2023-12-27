@@ -75,7 +75,6 @@ You can clear these folders as needed manually and then script will repopulate t
 This does not change how PMM caches and or when PMM decides to use these borded posters.
 
 ## Known issues / limitations
-* you may have collections that appear to only have a top and bottom border in plex (but display perfect when manually viewing the poster in the "modified" folder).  This is likely plex cutting off the poster due to it being a non-standard size.
 * pmm does not update your posters. Ex. lets say you run the script to create white thin bordered posters and then run pmm operations.  pmm successfully updates plex and your white thin bordered posters display fine in plex. 
     but you don't like the color and you delete this scripts cached files (i.e. "originals" and "modified" folders), and re-run pmm operations.  Plex still shows the old posters.
 * posters for collections with non-alphanumeric characters in the name do not get updated. this is likely because PMM and this script replaces those characters with different values.  log a github issue showing the collection name from both PMM and this script's outputs/logs.

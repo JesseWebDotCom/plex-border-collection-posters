@@ -35,7 +35,32 @@ def download_poster(item, title):
     # Download the poster image
     print(f"{title:<50}{'DOWNLOADING':<15}", end="\r", flush=True)
     response = requests.get(poster_url, headers={"X-Plex-Token": PLEX_TOKEN})
-    return Image.open(BytesIO(response.content))
+    original_image = Image.open(BytesIO(response.content))
+
+    return resize_image(original_image)
+
+def resize_image(original_image):
+    # Calculate aspect ratio
+    original_width, original_height = original_image.size
+
+    # Calculate the desired width for a 3:2 aspect ratio based on the original height
+    desired_width = int((2 / 3) * original_height)
+
+    # Calculate the corresponding height for the 3:2 aspect ratio
+    desired_height = int(desired_width * (3 / 2))
+
+    # Check if resizing is necessary
+    if original_width == desired_width and original_height == desired_height:
+        return original_image  # Return the original image if dimensions are correct
+
+    # Calculate the amount to crop from each side
+    crop_width_amount = (original_width - desired_width) // 2
+    crop_height_amount = (original_height - desired_height) // 2
+
+    # Crop the image to achieve the desired aspect ratio
+    cropped_img = original_image.crop((crop_width_amount, crop_height_amount, original_width - crop_width_amount, original_height - crop_height_amount))
+
+    return cropped_img
 
 def save_original(original_path, original_image):
     # Save the original poster to the temp folder
